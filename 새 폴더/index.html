@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>마음자리 - Therapy Town</title>
+  
+  <!-- 모던 웹폰트 Pretendard -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+  <style>
+    /* =========================================================
+       [컬러 커스텀 구역]
+       ========================================================= */
+    :root {
+      --bg-primary: #0a1128;      /* 메인 배경: 깊은 다크 네이비 */
+      --bg-secondary: #121e3d;    /* 보조 배경: 카드 및 컨테이너 배경 */
+      --bg-card: #1c2a4f;         /* 카드 요소 배경: 부드러운 딥 네이비 */
+      --bg-subtle: #25355e;       /* 호버 및 강조 영역 배경 */
+
+      --text-main: #ffffff;       /* 메인 텍스트: 선명한 순백색 */
+      --text-sub: #f8f9fa;        /* 보조 텍스트: 소프트 화이트 */
+      --text-muted: #e2e8f0;      /* 기타/각주 텍스트: 소프트 화이트 */
+      --brand-title: #ffffff;     /* Therapy Town 타이틀 전용 */
+
+      --accent-gold: #ffd166;     /* 메인 포인트: 따뜻한 별빛 골드 */
+      --accent-star: #fff3bf;     /* 서브 포인트: 부드러운 달빛 크림 */
+      --accent-soft: #4cc9f0;     /* 보조 악센트: 은은한 은하수 블루 */
+
+      --border-color: #2d3e66;    /* 기본 경계선 */
+      --border-subtle: #1e2c4d;   /* 은은한 구분선 */
+
+      --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      --glow-star: 0 0 12px rgba(255, 209, 102, 0.4);
+    }
+
+    .therapy-town-title {
+      color: var(--brand-title) !important;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
+    body { background-color: var(--bg-primary); color: var(--text-main); line-height: 1.7; }
+    a { text-decoration: none; color: inherit; }
+
+    /* 상단 내비게이션 바 */
+    header {
+      position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+      background: rgba(10, 17, 40, 0.85); backdrop-filter: blur(10px);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 8%; border-bottom: 1px solid var(--border-color); z-index: 100;
+      color: #ffffff;
+    }
+    .logo { font-weight: 700; font-size: 1.25rem; color: #ffffff; }
+    nav a { margin-left: 24px; font-size: 0.95rem; color: var(--text-sub); }
+
+    /* 섹션 공통 스타일 */
+    section { 
+      padding: 100px 8% 40px; 
+      min-height: 100vh; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+    }
+
+    /* ---------------------------------------------------------
+       [1페이지] 텍스트 상자 유지 + 오른쪽 이미지 대폭 확대
+       --------------------------------------------------------- */
+    .page-one { 
+      background-color: var(--bg-primary); 
+      text-align: left; 
+      align-items: flex-start;
+      padding-top: 85px;
+    }
+    
+    .hero-container {
+      max-width: 900px;
+      margin-bottom: 24px;
+    }
+
+    .hero-title { 
+      font-size: clamp(2.3rem, 4vw, 3.4rem); 
+      font-weight: 800; 
+      margin-bottom: 8px; 
+      letter-spacing: -0.02em;
+      color: var(--brand-title) !important;
+    }
+
+    .hero-desc { 
+      font-size: 1.1rem; 
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text-sub); 
+    }
+    
+    .hero-content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 30px;
+      width: 100%;
+      max-width: 1400px;
+      align-items: center;
+    }
+
+    .story-box {
+      width: 100%; 
+      padding: 36px 40px; 
+      background: var(--bg-secondary); 
+      border-radius: 16px; 
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-card);
+    }
+
+    .story-box h3 { 
+      font-size: 1.2rem; 
+      font-weight: 700; 
+      margin-bottom: 16px; 
+      color: var(--accent-gold) !important;
+      letter-spacing: -0.01em;
+      line-height: 1.5;
+    }
+
+    .story-box p { 
+      font-size: 0.94rem; 
+      color: var(--text-sub); 
+      line-height: 1.75;
+      white-space: pre-line;
+    }
+
+    .hero-image-box {
+      width: 100%;
+      height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
+    }
+
+    .hero-image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transform: scale(1.75);
+      display: block;
+      mix-blend-mode: screen; 
+    }
+
+    @media (max-width: 950px) {
+      .hero-content-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-image-box {
+        height: 350px;
+      }
+      .hero-image-box img {
+        transform: scale(1.3);
+      }
+    }
+
+    /* ---------------------------------------------------------
+       [2페이지] Therapy Town 소개 및 4개 칸(그리드) 섹션
+       --------------------------------------------------------- */
+    .page-two { background-color: var(--bg-secondary); align-items: center; text-align: center; }
+    .section-header { max-width: 700px; margin-bottom: 40px; }
+    .section-header h2 { font-size: 2.2rem; font-weight: 700; margin-bottom: 12px; color: #ffffff; }
+    .section-header p { font-size: 1.05rem; color: var(--text-sub); }
+
+    .card-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px; width: 100%; max-width: 1200px;
+    }
+    .feature-card {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      padding: 26px; border-radius: 12px; text-align: left;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .feature-card:hover { transform: translateY(-5px); border-color: var(--accent-gold); }
+    
+    .card-thumb { 
+      width: 100%; 
+      aspect-ratio: 1 / 1; 
+      background: var(--bg-subtle); 
+      border-radius: 8px; 
+      margin-bottom: 18px; 
+      overflow: hidden; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+    }
+    .card-thumb img {
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      display: block;
+    }
+
+    .feature-card h4 { font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; color: var(--accent-gold); }
+    .feature-card p { font-size: 0.92rem; color: var(--text-sub); }
+
+    /* ---------------------------------------------------------
+       [3페이지] 삼성 스타일 얇은 스크롤바 5개 카드 섹션
+       --------------------------------------------------------- */
+    .page-three { 
+      background-color: var(--bg-primary); 
+      align-items: center; 
+      text-align: center;
+      padding-left: 0;
+      padding-right: 0;
+      overflow: hidden;
+    }
+
+    .scroll-container {
+      width: 100%;
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding: 20px 8% 40px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-gold) transparent;
+    }
+
+    .scroll-container::-webkit-scrollbar { height: 3px; }
+    .scroll-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
+    .scroll-container::-webkit-scrollbar-thumb { background: var(--accent-gold); border-radius: 10px; }
+    .scroll-container::-webkit-scrollbar-thumb:hover { background: #ffe082; }
+
+    .scroll-card {
+      min-width: 260px;
+      max-width: 280px;
+      background: var(--bg-card);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-card);
+      text-align: left;
+      flex-shrink: 0;
+      scroll-snap-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .scroll-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Link wrapper estilo tarjeta-pe */
+    .card-link-wrapper {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      height: 100%;
+    }
+    
+    .scroll-card-img {
+      width: 100%;
+      height: 180px;
+      background-color: var(--bg-subtle);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .scroll-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .scroll-card-content { padding: 20px; }
+    .scroll-card-tag { font-size: 0.78rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 6px; }
+    .scroll-card-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
+    .scroll-card-desc { font-size: 0.88rem; color: var(--text-sub); }
+
+    /* 푸터 */
+    footer { padding: 30px 8%; background: #050814; color: var(--text-muted); text-align: center; font-size: 0.88rem; border-top: 1px solid var(--border-color); }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 내비게이션 (로고: 마음자리) -->
+  <header>
+    <div class="logo">마음자리</div>
+    <nav>
+      <a href="#page1">소개 & 스토리</a>
+      <a href="#page2">프로그램</a>
+      <a href="#page3">갤러리</a>
+    </nav>
+  </header>
+
+  <!-- [1페이지] 메인 섹션 -->
+  <section id="page1" class="page-one">
+    <div class="hero-container">
+      <h1 class="hero-title therapy-town-title">Therapy Town</h1>
+      <p class="hero-desc">“가장 중요한 것은 눈에 보이지 않아”</p>
+    </div>
+    
+    <div class="hero-content-grid">
+      <!-- 왼쪽: 스토리 글 상자 -->
+      <div class="story-box">
+        <h3>타인의 시선에서 벗어나 온전한 '나'를 만나는 마음의 행성</h3>
+        <p>24시간 타인에게 노출되는 공동체 생활 속에서 학생들은 비교와 완벽주의, 감정 억압으로 깊은 고립감을 겪고 있습니다. 하지만 기존 상담 제도는 문제 학생으로 보일까 봐 방문을 꺼리는 심리적 장벽이 존재했습니다.
+
+우리는 이 문제를 해결하기 위해 '어린왕자'의 친근한 세계관과 오감 체험 테라피를 결합했습니다. 심리 케어를 '치료'가 아닌 '자존감 향상을 위한 자기계발'로 재정의하여, 누구나 부담 없이 찾아와 온전히 '나' 자신을 바라보고 회복할 수 있는 전용 테라피 공간을 만듭니다.</p>
+      </div>
+
+      <!-- 오른쪽: 큼직하게 1.75배 확대된 테라피타운1.png -->
+      <div class="hero-image-box">
+        <img src="테라피타운1.png" alt="Therapy Town 조감도 및 모델">
+      </div>
+    </div>
+  </section>
+
+  <!-- [2페이지] Therapy Town 4개 공간 -->
+  <section id="page2" class="page-two">
+    <div class="section-header">
+      <h2>Therapy Town</h2>
+      <p>나를 깊이 있게 이해하고 위로받는 4가지 핵심 테라피 공간을 소개합니다.</p>
+    </div>
+
+    <div class="card-grid-4">
+      <div class="feature-card">
+        <div class="card-thumb">
+          <img src="다솜자리.png" alt="다솜자리">
+        </div>
+        <h4>다솜자리</h4>
+        <p>따뜻하고 편안한 분위기 속 자기 자신을 되돌아보고 자존감을 키울 수 있는 공간입니다.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-thumb">
+          <img src="온빛자리.png" alt="온빛자리">
+        </div>
+        <h4>온빛자리</h4>
+        <p>완벽해야한다는 압박 속에서 존재만으로 완벽한 존재라는 사실을 상기시킬 수 있는 공간입니다.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-thumb">
+          <img src="늘품자리.png" alt="늘품자리">
+        </div>
+        <h4>늘품자리</h4>
+        <p>억압되는 환경 속 숨겨놨던 감정을 낙서로 털어놓는 공간입니다.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-thumb">
+          <img src="숨뜰자리.png" alt="숨뜰자리">
+        </div>
+        <h4>숨뜰자리</h4>
+        <p>불안감 속에서 자연이 주는 평온함을 느낄 수 있는 공간입니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- [3페이지] 마음자리 하이라이트 -->
+  <section id="page3" class="page-three">
+    <div class="section-header">
+      <h2>마음자리 하이라이트</h2>
+      <p>좌우로 슬라이드하며 다양한 콘텐츠와 소식을 확인해보세요.</p>
+    </div>
+
+    <div class="scroll-container">
+      <!-- 1번 카드: GEO-MIND (Enlace amoĩva'ekue) -->
+      <div class="scroll-card">
+        <a href="https://seobeenko.github.io/-geomind/" target="_blank" class="card-link-wrapper">
+          <div class="scroll-card-img">
+            <img src="map.jpeg" alt="GEO-MIND">
+          </div>
+          <div class="scroll-card-content">
+            <div class="scroll-card-tag">PRODUCT 🔗</div>
+            <div class="scroll-card-title">GEO-MIND</div>
+            <div class="scroll-card-desc">현재 마음의 상태를 확인해 맞춤형으로 방을 추천해주는 앱</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="scroll-card">
+        <div class="scroll-card-img">
+          <img src="부적.png" alt="Lucky Card">
+        </div>
+        <div class="scroll-card-content">
+          <div class="scroll-card-tag">PROGRAM</div>
+          <div class="scroll-card-title">Lucky Card</div>
+          <div class="scroll-card-desc">오늘 나에게 필요한 행운의 메시지 뽑기</div>
+        </div>
+      </div>
+
+      <div class="scroll-card">
+        <div class="scroll-card-img">
+          <img src="hug.png" alt="Smart HUG">
+        </div>
+        <div class="scroll-card-content">
+          <div class="scroll-card-tag">STORY</div>
+          <div class="scroll-card-title">Smart HUG</div>
+          <div class="scroll-card-desc">지친 마음을 포근하게 안아주는 기계.</div>
+        </div>
+      </div>
+
+      <div class="scroll-card">
+        <div class="scroll-card-img">
+          <img src="차.png" alt="The Vending Machine">
+        </div>
+        <div class="scroll-card-content">
+          <div class="scroll-card-tag">EXPERIENCE</div>
+          <div class="scroll-card-title">The Vending Machine</div>
+          <div class="scroll-card-desc">고민을 넣으면 감정 처방이 나오는 마음 자판기.</div>
+        </div>
+      </div>
+
+      <div class="scroll-card">
+        <div class="scroll-card-img">
+          <img src="워리스톤.jpg" alt="Worry stone">
+        </div>
+        <div class="scroll-card-content">
+          <div class="scroll-card-tag">PRODUCT</div>
+          <div class="scroll-card-title">Worry stone</div>
+          <div class="scroll-card-desc">지친 마음을 달래주는 마법의 돌</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 푸터 -->
+  <footer>
+    <p>&copy; 2026 마음자리 (Therapy Town). All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

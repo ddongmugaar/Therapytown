@@ -1,0 +1,213 @@
+/* =========================================================
+   [컬러 커스텀 구역]
+   ========================================================= */
+:root {
+  --bg-primary: #0a1128;      
+  --bg-secondary: #121e3d;    
+  --bg-card: #1c2a4f;         
+  --bg-subtle: #25355e;       
+
+  --text-main: #ffffff;       
+  --text-sub: #f8f9fa;        
+  --text-muted: #e2e8f0;      
+  --brand-title: #ffffff;     
+
+  --accent-gold: #ffd166;     
+  --accent-star: #fff3bf;     
+  --accent-soft: #4cc9f0;     
+
+  --border-color: #2d3e66;    
+  --border-subtle: #1e2c4d;   
+
+  --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --glow-star: 0 0 12px rgba(255, 209, 102, 0.4); 
+}
+
+.therapy-town-title {
+  color: var(--brand-title) !important;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
+body { background-color: var(--bg-primary); color: var(--text-main); line-height: 1.7; }
+a { text-decoration: none; color: inherit; }
+
+/* 상단 내비게이션 바 */
+header {
+  position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+  background: rgba(10, 17, 40, 0.85); backdrop-filter: blur(10px);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 8%; border-bottom: 1px solid var(--border-color); z-index: 100;
+  color: #ffffff;
+}
+.logo { font-weight: 700; font-size: 1.25rem; color: #ffffff; }
+nav a { margin-left: 24px; font-size: 0.95rem; color: var(--text-sub); }
+
+/* 섹션 공통 스타일 */
+section { padding: 130px 8% 80px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+
+/* ---------------------------------------------------------
+   [1페이지] 수정 반영 메인 헤더 & 브랜드 스토리 (왼쪽 정렬 및 크기 축소)
+   --------------------------------------------------------- */
+.page-one { 
+  background-color: var(--bg-primary); 
+  text-align: left; 
+  align-items: flex-start; 
+}
+
+.hero-container {
+  max-width: 900px;
+  margin-bottom: 40px;
+}
+
+.hero-title { 
+  font-size: clamp(2.3rem, 4.5vw, 3.5rem); 
+  font-weight: 800; 
+  margin-bottom: 14px; 
+  letter-spacing: -0.02em;
+  color: var(--brand-title) !important;
+}
+
+.hero-desc { 
+  font-size: 1.15rem; 
+  font-weight: 600;
+  max-width: 750px; 
+  line-height: 1.5;
+  color: var(--text-sub); 
+}
+
+/* 브랜드 스토리 박스 */
+.story-box {
+  width: 100%; 
+  max-width: 720px; 
+  padding: 35px 40px; 
+  background: var(--bg-secondary); 
+  border-radius: 14px; 
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+  margin-left: 0; 
+}
+
+.story-box h3 { 
+  font-size: 1.25rem; 
+  font-weight: 700; 
+  margin-bottom: 14px; 
+  color: var(--accent-gold) !important;
+  letter-spacing: -0.01em;
+}
+
+.story-box p { 
+  font-size: 0.95rem; 
+  color: var(--text-sub); 
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+/* ---------------------------------------------------------
+   [2페이지] Therapy Town 소개 및 4개 칸(그리드) 섹션
+   --------------------------------------------------------- */
+.page-two { background-color: var(--bg-secondary); align-items: center; text-align: center; }
+.section-header { max-width: 700px; margin-bottom: 50px; }
+.section-header h2 { font-size: 2.2rem; font-weight: 700; margin-bottom: 15px; color: #ffffff; }
+.section-header p { font-size: 1.05rem; color: var(--text-sub); }
+
+.card-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px; width: 100%; max-width: 1100px;
+}
+.feature-card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  padding: 30px; border-radius: 12px; text-align: left;
+  transition: transform 0.3s, border-color 0.3s;
+}
+.feature-card:hover { transform: translateY(-5px); border-color: var(--accent-gold); }
+.card-thumb { 
+  width: 100%; height: 130px; background: var(--bg-subtle); border-radius: 8px; margin-bottom: 20px; 
+  display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.85rem;
+  overflow: hidden;
+}
+/* 이미지 스타일 추가 */
+.card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.feature-card h4 { font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; color: var(--accent-gold); }
+.feature-card p { font-size: 0.92rem; color: var(--text-sub); }
+
+/* ---------------------------------------------------------
+   [3페이지] 삼성 스타일 얇은 스크롤바 5개 카드 섹션
+   --------------------------------------------------------- */
+.page-three { 
+  background-color: var(--bg-primary); 
+  align-items: center; 
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  overflow: hidden;
+}
+
+.scroll-container {
+  width: 100%;
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding: 20px 8% 40px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-gold) transparent;
+}
+
+.scroll-container::-webkit-scrollbar { height: 3px; }
+.scroll-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
+.scroll-container::-webkit-scrollbar-thumb { background: var(--accent-gold); border-radius: 10px; }
+.scroll-container::-webkit-scrollbar-thumb:hover { background: #ffe082; }
+
+.scroll-card {
+  min-width: 260px;
+  max-width: 280px;
+  background: var(--bg-card);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+  text-align: left;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.scroll-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.scroll-card-img {
+  width: 100%;
+  height: 180px;
+  background-color: var(--bg-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  overflow: hidden;
+}
+
+/* 이미지 스타일 추가 */
+.scroll-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scroll-card-content { padding: 20px; }
+.scroll-card-tag { font-size: 0.78rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 6px; }
+.scroll-card-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
+.scroll-card-desc { font-size: 0.88rem; color: var(--text-sub); }
+
+/* 푸터 */
+footer { padding: 40px 8%; background: #050814; color: var(--text-muted); text-align: center; font-size: 0.9rem; border-top: 1px solid var(--border-color); }
